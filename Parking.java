@@ -104,23 +104,23 @@ public class Parking
         int tiempoAparcadoMinutos = salidaTodoMinutos - entradaTodoMinutos;
         switch (tipoTarifa){
             case 'R': 
-            if((entradaTodoMinutos > HORA_INICIO_ENTRADA_TEMPRANA && entradaTodoMinutos < HORA_FIN_ENTRADA_TEMPRANA) && (salidaTodoMinutos > HORA_INICIO_SALIDA_TEMPRANA && salidaTodoMinutos < HORA_FIN_SALIDA_TEMPRANA)){
-                importe += PRECIO_TARIFA_PLANA_REGULAR;
-                tipoDeTarifa += "Plana y Regular";
+            if((entradaTodoMinutos >= HORA_INICIO_ENTRADA_TEMPRANA && entradaTodoMinutos <= HORA_FIN_ENTRADA_TEMPRANA) && (salidaTodoMinutos >= HORA_INICIO_SALIDA_TEMPRANA && salidaTodoMinutos <= HORA_FIN_SALIDA_TEMPRANA)){
+                importe = PRECIO_TARIFA_PLANA_REGULAR;
+                tipoDeTarifa = "Plana y Regular";
             } 
             else{
-                if(entrada < 1100){
+                if(entrada <= 1100){
                     if (salida > 1100){
-                        importe += ((11 * 60 - entradaTodoMinutos) / 30 * PRECIO_MEDIA_REGULAR_HASTA11) + ((salidaTodoMinutos - 11 * 60) / 30 * PRECIO_MEDIA_REGULAR_DESPUES11);
+                        importe += ((11 * 60 - entradaTodoMinutos) / 30 * PRECIO_MEDIA_REGULAR_HASTA11) + ((salidaTodoMinutos - 11 * 60) / 30 * PRECIO_MEDIA_REGULAR_DESPUES11) + PRECIO_BASE_REGULAR;
                     }
                     else{
-                        importe += tiempoAparcadoMinutos / 30 * PRECIO_MEDIA_REGULAR_HASTA11;
+                        importe += tiempoAparcadoMinutos / 30 * PRECIO_MEDIA_REGULAR_HASTA11 + PRECIO_BASE_REGULAR;
                     }
                 }
                 else{
-                    importe += tiempoAparcadoMinutos / 30 * PRECIO_MEDIA_REGULAR_DESPUES11;
+                    importe += tiempoAparcadoMinutos / 30 * PRECIO_MEDIA_REGULAR_DESPUES11 + PRECIO_BASE_REGULAR;
                 }
-                tipoDeTarifa += "Regular";
+                tipoDeTarifa = "Regular";
             }
             regular ++;//incrementar el numero de clientes en regular.
             break;

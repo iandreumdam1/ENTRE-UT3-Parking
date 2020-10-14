@@ -17,7 +17,7 @@ public class DemoParking {
 
         teclado = new Scanner(System.in);
         parking = new Parking("Sky");
-        //parking.setNombre("Sky Park");
+        parking.setNombre("Sky Park");
 
     }
 
